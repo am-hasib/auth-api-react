@@ -8,3 +8,6 @@
 .red_btn {
   @apply py-2 px-6 rounded-md duration-300 transition-all focus:ring-0 outline-none focus:outline-none bg-rose-700 hover:bg-rose-600;
 }
+.green_btn {
+  @apply py-2 px-6 rounded-md duration-300 transition-all focus:ring-0 outline-none focus:outline-none bg-green-700 hover:bg-green-600;
+}

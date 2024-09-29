@@ -54,6 +54,7 @@ exports.login = async (req, res) => {
       httpOnly: true,
       sameSite: "lax",
     });
+
     return res.status(200).send({ data: existingUser, token });
   } catch (error) {
     return res.status(500).send({ message: "Error in Login", error });
@@ -66,5 +67,20 @@ exports.logout = async (req, res) => {
     return res.status(200).send({ message: "Logout Successfully" });
   } catch (error) {
     return res.status(500).send({ message: "Error in Logout", error });
+  }
+};
+
+exports.myDetails = async (req, res) => {
+  const userId = req._id;
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send({ message: "User Not Found in the database" });
+    }
+    return res.status(200).send({ message: "OK", user });
+  } catch (error) {
+    return res
+      .status(500)
+      .send({ message: "Error Gentting My Details", error });
   }
 };

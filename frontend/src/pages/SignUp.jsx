@@ -3,6 +3,7 @@ import { FaEyeSlash, FaEye } from "react-icons/fa";
 import axios from "axios";
 import { handleError } from "../utils/handleError";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 axios.defaults.withCredentials = true;
 const defaultValues = {
   email: "",
@@ -13,6 +14,7 @@ const defaultValues = {
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(true);
   const [signupInput, setSignupInput] = useState(defaultValues);
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -21,9 +23,10 @@ const SignUp = () => {
         password: signupInput.password,
         username: signupInput.username,
       });
-      toast.success("Profile Created Succussfully")
+      toast.success("Profile Created Succussfully");
       console.log(response.data);
       console.log(signupInput);
+      navigate("/login", { replace: true });
     } catch (error) {
       handleError(error);
     }

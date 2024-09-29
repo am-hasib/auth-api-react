@@ -3,6 +3,7 @@ import { FaEyeSlash, FaEye } from "react-icons/fa";
 import axios from "axios";
 import { handleError } from "../utils/handleError";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 axios.defaults.withCredentials = true;
 const defaultValues = {
   email: "",
@@ -11,6 +12,7 @@ const defaultValues = {
 const Login = () => {
   const [showPassword, setShowPassword] = useState(true);
   const [loginInput, setLoginInput] = useState(defaultValues);
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -20,8 +22,9 @@ const Login = () => {
       });
       console.log(response.data);
       console.log(loginInput);
-      
-      toast.success("Login Succussfully")
+
+      navigate("/");
+      toast.success("Login Succussfully");
     } catch (error) {
       handleError(error);
     }
@@ -82,7 +85,7 @@ const Login = () => {
             )}
           </span>
         </div>
-        <button className="default_btn" type="submit">
+        <button className="default_btn" type="submit" onClick={()=> navigate}>
           Login
         </button>
       </form>
